@@ -1,5 +1,5 @@
 //
-//  MTDJViewController.h
+//  AppDelegate.h
 //  CleanYourScreen
 //
 //  Created by Jeff Harrison on 12/18/12.
@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MTDJViewController : UIViewController
+@interface MTDJAppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (strong, nonatomic) UIWindow *window;
 
 @end
