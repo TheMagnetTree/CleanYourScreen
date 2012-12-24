@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63C220F01687FAE90036792B /* GermBodyPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C220EC1687FAE90036792B /* GermBodyPlaceholder.png */; };
+		63C220F11687FAE90036792B /* GermFaceAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C220ED1687FAE90036792B /* GermFaceAtlas.png */; };
+		63C220F21687FAE90036792B /* GermFacePlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C220EE1687FAE90036792B /* GermFacePlaceholder.png */; };
+		63C220F31687FAE90036792B /* GermPlaceholderProject.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 63C220EF1687FAE90036792B /* GermPlaceholderProject.xcf */; };
 		7278FA7E1687DF6F003AB2CA /* GermView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7278FA7D1687DF6F003AB2CA /* GermView.m */; };
 		7278FA821687F599003AB2CA /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7278FA811687F599003AB2CA /* Common.m */; };
 		72E8EFBD1680C21E006FF902 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E8EFBC1680C21E006FF902 /* UIKit.framework */; };
@@ -40,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		63C220EC1687FAE90036792B /* GermBodyPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GermBodyPlaceholder.png; sourceTree = "<group>"; };
+		63C220ED1687FAE90036792B /* GermFaceAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GermFaceAtlas.png; sourceTree = "<group>"; };
+		63C220EE1687FAE90036792B /* GermFacePlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GermFacePlaceholder.png; sourceTree = "<group>"; };
+		63C220EF1687FAE90036792B /* GermPlaceholderProject.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GermPlaceholderProject.xcf; sourceTree = "<group>"; };
 		7278FA7C1687DF6F003AB2CA /* GermView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GermView.h; sourceTree = "<group>"; };
 		7278FA7D1687DF6F003AB2CA /* GermView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GermView.m; sourceTree = "<group>"; };
 		7278FA801687F599003AB2CA /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -95,6 +103,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63C220EB1687FAE90036792B /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				63C220EC1687FAE90036792B /* GermBodyPlaceholder.png */,
+				63C220ED1687FAE90036792B /* GermFaceAtlas.png */,
+				63C220EE1687FAE90036792B /* GermFacePlaceholder.png */,
+				63C220EF1687FAE90036792B /* GermPlaceholderProject.xcf */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		72E8EFAD1680C21E006FF902 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +148,7 @@
 		72E8EFC21680C21E006FF902 /* CleanYourScreen */ = {
 			isa = PBXGroup;
 			children = (
+				63C220EB1687FAE90036792B /* Assets */,
 				72E8EFCB1680C21E006FF902 /* AppDelegate.h */,
 				72E8EFCC1680C21E006FF902 /* AppDelegate.m */,
 				72E8EFD41680C21E006FF902 /* MainStoryboard_iPhone.storyboard */,
@@ -255,6 +275,10 @@
 				72E8EFD31680C21E006FF902 /* Default-568h@2x.png in Resources */,
 				72E8EFD61680C21E006FF902 /* MainStoryboard_iPhone.storyboard in Resources */,
 				72E8EFD91680C21E006FF902 /* MainStoryboard_iPad.storyboard in Resources */,
+				63C220F01687FAE90036792B /* GermBodyPlaceholder.png in Resources */,
+				63C220F11687FAE90036792B /* GermFaceAtlas.png in Resources */,
+				63C220F21687FAE90036792B /* GermFacePlaceholder.png in Resources */,
+				63C220F31687FAE90036792B /* GermPlaceholderProject.xcf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
