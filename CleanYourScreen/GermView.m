@@ -62,11 +62,15 @@
 - (void)initBody {
     CGSize size = CGSizeMake(100, 100);
     CGSize normalizedSize = CGSizeMake(size.width / CGImageGetWidth(self.bodyAtlas), size.height / CGImageGetHeight(self.bodyAtlas));
-    self.faceLayer.bounds = CGRectMake(0, 0, size.width, size.height);
+    self.bodyLayer.bounds = CGRectMake(0, 0, size.width, size.height);
+    self.bodyLayer.contentsRect = CGRectMake(0, 0, normalizedSize.width, normalizedSize.height);
 }
 
 - (void)initFace {
-    
+    CGSize size = CGSizeMake(100, 100);
+    CGSize normalizedSize = CGSizeMake(size.width / CGImageGetWidth(self.faceAtlas), size.height / CGImageGetHeight(self.faceAtlas));
+    self.faceLayer.bounds = CGRectMake(0, 0, size.width, size.height);
+    self.faceLayer.contentsRect = CGRectMake(0, 0, normalizedSize.width, normalizedSize.height);
 }
 
 - (id)initWithFrame:(CGRect)frame
