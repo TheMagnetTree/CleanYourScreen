@@ -148,17 +148,17 @@
 		72E8EFC21680C21E006FF902 /* CleanYourScreen */ = {
 			isa = PBXGroup;
 			children = (
-				63C220EB1687FAE90036792B /* Assets */,
-				72E8EFCB1680C21E006FF902 /* AppDelegate.h */,
-				72E8EFCC1680C21E006FF902 /* AppDelegate.m */,
 				72E8EFD41680C21E006FF902 /* MainStoryboard_iPhone.storyboard */,
 				72E8EFD71680C21E006FF902 /* MainStoryboard_iPad.storyboard */,
+				72E8EFCB1680C21E006FF902 /* AppDelegate.h */,
+				72E8EFCC1680C21E006FF902 /* AppDelegate.m */,
 				72E8EFDA1680C21E006FF902 /* ViewController.h */,
 				72E8EFDB1680C21E006FF902 /* ViewController.m */,
 				7278FA7C1687DF6F003AB2CA /* GermView.h */,
 				7278FA7D1687DF6F003AB2CA /* GermView.m */,
 				7278FA801687F599003AB2CA /* Common.h */,
 				7278FA811687F599003AB2CA /* Common.m */,
+				63C220EB1687FAE90036792B /* Assets */,
 				72E8EFC31680C21E006FF902 /* Supporting Files */,
 			);
 			path = CleanYourScreen;
