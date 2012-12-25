@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
 
-@interface MTDJViewController : UIViewController
+@interface ViewController : UIViewController
 
 @end

@@ -13,8 +13,10 @@
 @property (strong, nonatomic) NSString * faceState;
 @property (strong, nonatomic) NSString * bodyState;
 
-+ (GermView *) createGermViewWithBody:(NSString *)pathToBodyAtlas andFaces:(NSString *) pathToFaceAtlas;
 - (void)setFaceState:(NSString *)faceState;
 - (void)setBodyState:(NSString *)bodyState;
+
+- (void)setFaceAtlasWithPath:(NSString *)pathToFaceAtlas;
+- (void)setBodyAtlasWithPath:(NSString *)pathToBodyAtlas;
 
 @end

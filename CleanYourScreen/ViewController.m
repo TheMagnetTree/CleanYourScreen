@@ -7,14 +7,16 @@
 //
 
 #import "ViewController.h"
+#import "GermView.h"
 
-@interface MTDJViewController ()
+@interface ViewController ()
 
 @property (strong, nonatomic) UILocalNotification *cleanMeNotifier;
+@property (weak, nonatomic) IBOutlet GermView *myGerm;
 
 @end
 
-@implementation MTDJViewController
+@implementation ViewController
 
 @synthesize cleanMeNotifier = _cleanMeNotifier;
 
@@ -41,6 +43,13 @@
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [[UIApplication sharedApplication] scheduleLocalNotification:self.cleanMeNotifier];
     // Clean up any UI goodness and save stats
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:YES];
+    [self.myGerm setBodyAtlasWithPath:@"GermBodyPlaceholder.png"];
+    [self.myGerm setFaceAtlasWithPath:@"GermFaceAtlas.png"];
 }
 
 - (void)viewDidLoad {
