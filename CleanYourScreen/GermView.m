@@ -16,17 +16,20 @@
 @property CALayer *faceLayer;
 @property CALayer *bodyLayer;
 
+
 @end
 
 @implementation GermView
+
+@synthesize velocityMagnitude = _velocityMagnitude;
+@synthesize velocityDirectionInRadians = _velocityDirectionInRadians;
 
 @synthesize faceAtlas = _faceAtlas;
 @synthesize bodyAtlas = _bodyAtlas;
 @synthesize faceLayer = _faceLayer;
 @synthesize bodyLayer = _bodyLayer;
-@synthesize faceState = _faceState;
-@synthesize bodyState = _bodyState;
 
+// I basically do the same thing twice with face/body... DERP lernan
 #define BODY_WIDTH 100
 #define BODY_HEIGHT 100
 
@@ -40,8 +43,8 @@
     CGSize size = CGSizeMake(BODY_WIDTH, BODY_HEIGHT);
     CGSize normalizedSize = CGSizeMake(size.width / CGImageGetWidth(self.bodyAtlas), size.height / CGImageGetHeight(self.bodyAtlas));
     CALayer *bodyLayer = [[CALayer alloc]init];
-    NSLog(@"%f", self.bounds.size.width);
     bodyLayer.bounds = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
+    bodyLayer.anchorPoint = CGPointMake(0, 0);
     bodyLayer.contentsRect = CGRectMake(0, 0, normalizedSize.width, normalizedSize.height);
     bodyLayer.contents = (id) self.bodyAtlas;
     [self.layer addSublayer:bodyLayer];
@@ -67,14 +70,11 @@
     CALayer *faceLayer = [[CALayer alloc] init];
     faceLayer.bounds = CGRectMake(0, 0, self.bounds.size.width, self.bounds.size.height);
     faceLayer.contentsRect = CGRectMake(0, 0, normalizedSize.width, normalizedSize.height);
+    faceLayer.anchorPoint = CGPointMake(0, 0);
     faceLayer.contents = (id) self.faceAtlas;
     [self.layer addSublayer:faceLayer];
     [self setFaceLayer:[self.layer.sublayers objectAtIndex:1]];
-    NSMutableDictionary *newActions = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNull null], @"onOrderIn",
-                                       [NSNull null], @"onOrderOut",
-                                       [NSNull null], @"sublayers",
-                                       [NSNull null], @"contentsRect",
-                                       [NSNull null], @"bounds",
+    NSMutableDictionary *newActions = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNull null], @"contentsRect",
                                        nil];
     self.faceLayer.actions = newActions;
 }

@@ -10,11 +10,9 @@
 
 @interface GermView : UIButton
 
-@property (strong, nonatomic) NSString * faceState;
-@property (strong, nonatomic) NSString * bodyState;
+@property NSNumber *velocityMagnitude;
+@property NSNumber *velocityDirectionInRadians;
 
-- (void)setFaceState:(NSString *)faceState;
-- (void)setBodyState:(NSString *)bodyState;
 - (void)blinkForSeconds:(NSNumber *)seconds;
 
 - (void)setFaceAtlasWithPath:(NSString *)pathToFaceAtlas;
