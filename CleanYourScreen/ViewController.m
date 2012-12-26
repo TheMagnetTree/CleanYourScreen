@@ -59,14 +59,15 @@
     [super viewDidAppear:YES];
     for(int i = 0; i < 20; i++) {
         GermView *myGerm = [[GermView alloc]init];
-        [myGerm setBounds:CGRectMake(0, 0, 50, 50)];
-        [myGerm setCenter:self.view.center];
+        int germsize = arc4random() % 35 + 35;
+        [myGerm setBounds:CGRectMake(0, 0, germsize, germsize)];
+        [myGerm setCenter:CGPointMake(arc4random() % (int)self.view.frame.size.width + germsize/2 - 5, arc4random() % (int)self.view.frame.size.height - germsize/2 + 5)]; // prevent spawning in walls
         [myGerm setBodyAtlasWithPath:@"GermBodyPlaceholder.png"];
         [myGerm setFaceAtlasWithPath:@"GermFaceAtlas.png"];
         [myGerm addTarget:self action:@selector(germPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view insertSubview:myGerm atIndex:0];
         [self.myGerms addObject:[self.view.subviews objectAtIndex:0]];
-        [self startLinearMovement:myGerm magnitude:[NSNumber numberWithDouble:(arc4random() % 300 / 100 + .5)] directionInRadians:[NSNumber numberWithDouble:(arc4random() % 360) * M_PI / 180]];
+        [self startLinearMovement:myGerm magnitude:[NSNumber numberWithDouble:(arc4random() % 300 / 100 + .5)] directionInRadians:[NSNumber numberWithDouble:(arc4random() % 3600) * M_PI / 1800]];
     }
 }
 
@@ -78,20 +79,30 @@
 
 - (void)startLinearMovement:(UIView *)sender magnitude:(NSNumber *)magnitude directionInRadians:(NSNumber *)direction {
     if(magnitude && direction) {
+        // What's our next move?
         double moveX = sender.frame.origin.x + ([magnitude doubleValue] * cos([direction doubleValue]));
-        if(moveX < 0 && ([magnitude doubleValue] > M_PI/2 || [magnitude doubleValue] < M_PI/2*3)) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
-        }
-        else if(moveX > self.view.frame.size.width - sender.frame.size.width) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
-        }
-        
         double moveY = sender.frame.origin.y + ([magnitude integerValue] * sin([direction doubleValue]));
-        if(moveY < 0) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
+
+        // If out of bounds and moving farther out of bounds then mirror them by adding PI radians
+        if(moveX < 0 && ([direction doubleValue] > M_PI/2 || [direction doubleValue] < M_PI/2*3)) {
+            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]]; // add some variance
+            if([direction doubleValue] >= 360)
+                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
         }
-        else if(moveY > self.view.frame.size.height - sender.frame.size.height) {
+        else if(moveX > self.view.frame.size.width - sender.frame.size.width && ([direction doubleValue] > M_PI/2*3 || [direction doubleValue] < M_PI/2)) {
             direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
+            if([direction doubleValue] >= 360)
+                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
+        }
+        else if(moveY < 0 && ([direction doubleValue] > M_PI || [direction doubleValue] < 0)) {
+            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
+            if([direction doubleValue] >= 360)
+                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
+        }
+        else if(moveY > self.view.frame.size.height - sender.frame.size.height && ([direction doubleValue] > 0 || [direction doubleValue] < M_PI)) {
+            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
+            if([direction doubleValue] >= 360)
+                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
         }
         
         
