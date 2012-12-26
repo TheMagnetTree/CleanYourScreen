@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GermView : UIView
+@interface GermView : UIButton
 
 @property (strong, nonatomic) NSString * faceState;
 @property (strong, nonatomic) NSString * bodyState;
 
 - (void)setFaceState:(NSString *)faceState;
 - (void)setBodyState:(NSString *)bodyState;
+- (void)blinkForSeconds:(NSNumber *)seconds;
 
 - (void)setFaceAtlasWithPath:(NSString *)pathToFaceAtlas;
 - (void)setBodyAtlasWithPath:(NSString *)pathToBodyAtlas;

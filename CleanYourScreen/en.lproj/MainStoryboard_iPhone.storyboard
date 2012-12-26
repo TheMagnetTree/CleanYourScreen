@@ -37,34 +37,24 @@
                                     <outlet property="delegate" destination="2" id="hha-Rw-rdl"/>
                                 </connections>
                             </adBannerView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q4j-u1-Waz" customClass="GermView">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Q4j-u1-Waz" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="131" id="4pA-yV-rS3"/>
-                            <constraint firstItem="Q4j-u1-Waz" firstAttribute="top" secondItem="3" secondAttribute="top" constant="119" id="ILI-aG-gp3"/>
-                            <constraint firstAttribute="trailing" secondItem="Q4j-u1-Waz" secondAttribute="trailing" constant="188" id="KPl-as-sxy"/>
-                            <constraint firstAttribute="bottom" secondItem="Q4j-u1-Waz" secondAttribute="bottom" constant="428" id="Qoy-m1-QKO"/>
+                            <constraint firstItem="50C-w5-AYa" firstAttribute="centerX" secondItem="sGQ-6G-N9P" secondAttribute="centerX" type="default" id="AHv-0S-maY"/>
                             <constraint firstItem="sGQ-6G-N9P" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="RO7-9s-5Eo"/>
-                            <constraint firstItem="50C-w5-AYa" firstAttribute="centerX" secondItem="sGQ-6G-N9P" secondAttribute="centerX" type="default" id="cZi-Qw-yV5"/>
                             <constraint firstItem="sGQ-6G-N9P" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="h5c-9K-O2O"/>
                             <constraint firstItem="sGQ-6G-N9P" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="suZ-sq-Epj"/>
                             <constraint firstItem="50C-w5-AYa" firstAttribute="top" secondItem="3" secondAttribute="top" constant="252" id="wys-cG-fCF"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="myGerm" destination="Q4j-u1-Waz" id="Qb4-TJ-8Hg"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-171" y="12"/>
+            <point key="canvasLocation" x="-286" y="21"/>
         </scene>
     </scenes>
     <classes>
-        <class className="GermView" superclassName="UIView">
+        <class className="GermView" superclassName="UIButton">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GermView.h"/>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
@@ -74,6 +64,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cleanButtonPressed:"/>
+                <relationship kind="action" name="germPressed:"/>
                 <relationship kind="outlet" name="myGerm" candidateClass="GermView"/>
             </relationships>
         </class>

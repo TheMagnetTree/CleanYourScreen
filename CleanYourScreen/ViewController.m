@@ -12,7 +12,7 @@
 @interface ViewController ()
 
 @property (strong, nonatomic) UILocalNotification *cleanMeNotifier;
-@property (weak, nonatomic) IBOutlet GermView *myGerm;
+@property (strong, nonatomic) NSMutableArray *myGerms;
 
 @end
 
@@ -32,24 +32,41 @@
 }
 
 - (NSDate *)nextFireDate {
-    //TODO Placeholder -- determine based on user preferences
+    //TODO Placeholder -- determine based on user preferences / whatever
     return [NSDate dateWithTimeIntervalSinceNow:10];
 }
 
 - (IBAction)cleanButtonPressed:(id)sender {
-    [self.cleanMeNotifier setFireDate:self.nextFireDate]; // need method that gets time requested
+    [self.cleanMeNotifier setFireDate:self.nextFireDate];
     [self.cleanMeNotifier setAlertBody:@"Clean me again!"];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0]; // overlaps with cancelAllLocalNotifications in a funky way. Doing both just in case.
+    
+    // overlaps with cancelAllLocalNotifications in a funky way. Doing both just in case.
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0]; 
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
     [[UIApplication sharedApplication] scheduleLocalNotification:self.cleanMeNotifier];
-    // Clean up any UI goodness and save stats
+    // TODO Clean up any UI goodness and save stats
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];
-    [self.myGerm setBodyAtlasWithPath:@"GermBodyPlaceholder.png"];
-    [self.myGerm setFaceAtlasWithPath:@"GermFaceAtlas.png"];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    GermView *myGerm = [[GermView alloc]init];
+    [myGerm setBounds:CGRectMake(0, 0, 75, 75)];
+    [myGerm setCenter:self.view.center];
+    [myGerm setBodyAtlasWithPath:@"GermBodyPlaceholder.png"];
+    [myGerm setFaceAtlasWithPath:@"GermFaceAtlas.png"];
+    [myGerm addTarget:self action:@selector(germPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:myGerm];
+}
+
+- (void)germPressed:(id)sender {
+    [sender blinkForSeconds:[NSNumber numberWithFloat:0.5]];
 }
 
 - (void)viewDidLoad {
