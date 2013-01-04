@@ -15,6 +15,7 @@
 
 - (void)blinkForSeconds:(NSNumber *)seconds;
 
+
 - (void)setFaceAtlasWithPath:(NSString *)pathToFaceAtlas;
 - (void)setBodyAtlasWithPath:(NSString *)pathToBodyAtlas;
 
