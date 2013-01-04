@@ -75,9 +75,17 @@
 }
 
 - (void)germPressed:(id)sender {
+    /*
     if([sender isKindOfClass:[GermView class]]) {
         [sender blinkForSeconds:[NSNumber numberWithFloat:0.5]];
     }
+    */
+    if([sender isKindOfClass:[GermView class]]) {
+        [sender blinkEyes:[NSNumber numberWithInt:2] withOpenDuration:[NSNumber numberWithFloat:0.15f]
+                                                    withCloseDuration:[NSNumber numberWithFloat:0.05f]
+                                                       withStartDelay:[NSNumber numberWithFloat:0.2f]];
+    }
+    
 }
 
 - (void)startLinearMovement:(UIView *)sender magnitude:(NSNumber *)magnitude directionInRadians:(NSNumber *)direction {

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63A979131694444200424563 /* Atlas1Skull.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A979121694444200424563 /* Atlas1Skull.png */; };
+		63A979161694474300424563 /* Atlas1Blob.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A979141694474200424563 /* Atlas1Blob.png */; };
+		63A979171694474300424563 /* Atlas1EColi.png in Resources */ = {isa = PBXBuildFile; fileRef = 63A979151694474200424563 /* Atlas1EColi.png */; };
 		63C220FA1687FB8A0036792B /* GermBodyPlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C220F61687FB8A0036792B /* GermBodyPlaceholder.png */; };
 		63C220FB1687FB8A0036792B /* GermFaceAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C220F71687FB8A0036792B /* GermFaceAtlas.png */; };
 		63C220FC1687FB8A0036792B /* GermFacePlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C220F81687FB8A0036792B /* GermFacePlaceholder.png */; };
@@ -45,6 +48,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		63A979121694444200424563 /* Atlas1Skull.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Atlas1Skull.png; sourceTree = "<group>"; };
+		63A979141694474200424563 /* Atlas1Blob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Atlas1Blob.png; sourceTree = "<group>"; };
+		63A979151694474200424563 /* Atlas1EColi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Atlas1EColi.png; sourceTree = "<group>"; };
 		63C220F61687FB8A0036792B /* GermBodyPlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GermBodyPlaceholder.png; sourceTree = "<group>"; };
 		63C220F71687FB8A0036792B /* GermFaceAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GermFaceAtlas.png; sourceTree = "<group>"; };
 		63C220F81687FB8A0036792B /* GermFacePlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GermFacePlaceholder.png; sourceTree = "<group>"; };
@@ -109,6 +115,9 @@
 		63C220F51687FB8A0036792B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				63A979141694474200424563 /* Atlas1Blob.png */,
+				63A979151694474200424563 /* Atlas1EColi.png */,
+				63A979121694444200424563 /* Atlas1Skull.png */,
 				63C220F61687FB8A0036792B /* GermBodyPlaceholder.png */,
 				63C220F71687FB8A0036792B /* GermFaceAtlas.png */,
 				63C220F81687FB8A0036792B /* GermFacePlaceholder.png */,
@@ -283,6 +292,9 @@
 				63C220FB1687FB8A0036792B /* GermFaceAtlas.png in Resources */,
 				63C220FC1687FB8A0036792B /* GermFacePlaceholder.png in Resources */,
 				63C220FD1687FB8A0036792B /* GermPlaceholderProject.xcf in Resources */,
+				63A979131694444200424563 /* Atlas1Skull.png in Resources */,
+				63A979161694474300424563 /* Atlas1Blob.png in Resources */,
+				63A979171694474300424563 /* Atlas1EColi.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
