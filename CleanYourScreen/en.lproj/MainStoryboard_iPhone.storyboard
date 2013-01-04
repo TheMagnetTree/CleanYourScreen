@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C3006" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
     </dependencies>
@@ -40,11 +40,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="50C-w5-AYa" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="64R-ID-lsn"/>
                             <constraint firstItem="50C-w5-AYa" firstAttribute="centerX" secondItem="sGQ-6G-N9P" secondAttribute="centerX" type="default" id="AHv-0S-maY"/>
                             <constraint firstItem="sGQ-6G-N9P" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="RO7-9s-5Eo"/>
                             <constraint firstItem="sGQ-6G-N9P" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="h5c-9K-O2O"/>
                             <constraint firstItem="sGQ-6G-N9P" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="suZ-sq-Epj"/>
-                            <constraint firstItem="50C-w5-AYa" firstAttribute="top" secondItem="3" secondAttribute="top" constant="252" id="wys-cG-fCF"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -54,9 +54,6 @@
         </scene>
     </scenes>
     <classes>
-        <class className="GermView" superclassName="UIButton">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GermView.h"/>
-        </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
@@ -64,8 +61,6 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
             <relationships>
                 <relationship kind="action" name="cleanButtonPressed:"/>
-                <relationship kind="action" name="germPressed:"/>
-                <relationship kind="outlet" name="myGerm" candidateClass="GermView"/>
             </relationships>
         </class>
     </classes>

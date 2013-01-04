@@ -23,6 +23,10 @@
 
 @synthesize velocityMagnitude = _velocityMagnitude;
 @synthesize velocityDirectionInRadians = _velocityDirectionInRadians;
+@synthesize targetMagnitude = _targetMagnitude;
+@synthesize targetDirectionInRadians = _targetDirectionInRadians;
+@synthesize maxMagnitudeIncrement = _maxMagnitudeIncrement;
+@synthesize maxDirectionIncrement = _maxDirectionIncrement;
 
 @synthesize faceAtlas = _faceAtlas;
 @synthesize bodyAtlas = _bodyAtlas;
@@ -30,8 +34,8 @@
 @synthesize bodyLayer = _bodyLayer;
 
 // I basically do the same thing twice with face/body... DERP lernan
-#define BODY_WIDTH 100
-#define BODY_HEIGHT 100
+#define BODY_WIDTH 256
+#define BODY_HEIGHT 256
 
 - (void)setBodyAtlasWithPath:(NSString *)pathToBodyAtlas {
     NSString *path = [[NSBundle mainBundle] pathForResource:pathToBodyAtlas ofType:nil];
@@ -55,8 +59,8 @@
     self.faceLayer.actions = newActions;
 }
 
-#define FACE_WIDTH 100
-#define FACE_HEIGHT 100
+#define FACE_WIDTH 256
+#define FACE_HEIGHT 256
 
 - (void)setFaceAtlasWithPath:(NSString *)pathToFaceAtlas {
     NSString *path = [[NSBundle mainBundle] pathForResource:pathToFaceAtlas ofType:nil];
@@ -83,9 +87,53 @@
     self.faceLayer.contentsRect = CGRectMake(0, 0, .5, 1);
 }
 
+- (void)closeEyes {
+    self.faceLayer.contentsRect = CGRectMake(.5, 0, .5, 1);
+}
+
 - (void)blinkForSeconds:(NSNumber *)seconds {
+    
     self.faceLayer.contentsRect = CGRectMake(.5, 0, .5, 1);
     [NSTimer scheduledTimerWithTimeInterval:seconds.floatValue target:self selector:@selector(openEyes) userInfo:nil repeats:NO];
+}
+
+- (void)blinkEyes:(NSNumber *)numTimes withOpenDuration:(NSNumber *)openSeconds
+                                       withCloseDuration:(NSNumber *)closeSeconds
+                                       withStartDelay:(NSNumber *)delaySeconds
+{
+    float nextClose = 0;
+    float nextOpen = 0;
+    for(int blinkNum=0; blinkNum<numTimes.intValue; blinkNum++){
+        nextClose = delaySeconds.floatValue + blinkNum * (openSeconds.floatValue + 0.1f);
+        nextOpen = nextClose + 0.1f;
+        [NSTimer scheduledTimerWithTimeInterval:nextClose target:self selector:@selector(closeEyes) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:nextOpen target:self selector:@selector(openEyes) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)randomizeTargetVelocity {
+    [self setTargetMagnitude:[NSNumber numberWithDouble:(arc4random() % 300 / 1200 + .5)]];
+    [self setTargetDirectionInRadians:[NSNumber numberWithDouble:(arc4random() % 3600) * M_PI / 1800]];
+}
+
+- (void)incrementVelocityToTarget {
+    double targetMag = self.targetMagnitude.doubleValue;
+    double targetDir = self.targetDirectionInRadians.doubleValue;
+    double currMag = self.velocityMagnitude.doubleValue;
+    double currDir = self.velocityDirectionInRadians.doubleValue;
+    double mag = self.maxMagnitudeIncrement.doubleValue;
+    double dir = self.maxDirectionIncrement.doubleValue;
+    
+    if(targetMag - currMag > mag/2) currMag += mag;
+    else if(targetMag - currMag < mag/2) currMag -= mag;
+    else currMag = targetMag;
+    
+    if(targetDir - currDir > dir/2) currDir += dir;
+    else if(targetDir - currDir < dir/2) currDir -= dir;
+    else currDir = targetDir;
+    
+    [self setVelocityMagnitude:[NSNumber numberWithDouble:currMag]];
+    [self setVelocityDirectionInRadians:[NSNumber numberWithDouble:currDir]];
 }
 
 - (id)initWithFrame:(CGRect)frame

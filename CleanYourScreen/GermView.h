@@ -12,8 +12,16 @@
 
 @property NSNumber *velocityMagnitude;
 @property NSNumber *velocityDirectionInRadians;
+@property NSNumber *targetMagnitude;
+@property NSNumber *targetDirectionInRadians;
+@property NSNumber *maxMagnitudeIncrement;
+@property NSNumber *maxDirectionIncrement;
 
 - (void)blinkForSeconds:(NSNumber *)seconds;
+- (void)blinkEyes:(NSNumber *)numTimes withOpenDuration:(NSNumber *)openSeconds
+                                       withCloseDuration:(NSNumber *)closeSeconds
+                                       withStartDelay:(NSNumber *)delaySeconds;
+- (void)randomizeTargetVelocity;
 
 - (void)setFaceAtlasWithPath:(NSString *)pathToFaceAtlas;
 - (void)setBodyAtlasWithPath:(NSString *)pathToBodyAtlas;
