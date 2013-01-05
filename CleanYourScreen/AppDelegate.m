@@ -13,6 +13,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [NSNumber numberWithInt:10000000], @"reminderInterval", // TODO: Find good values
+                                     nil]; //add any defaults here
+    [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     return YES;
 }
 							

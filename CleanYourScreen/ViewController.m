@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) UILocalNotification *cleanMeNotifier;
 @property (strong, nonatomic) NSMutableArray *myGerms; // keep track of the views that are germs
+@property (strong, nonatomic) NSUserDefaults *defaults;
 
 @end
 
@@ -20,6 +21,7 @@
 
 @synthesize cleanMeNotifier = _cleanMeNotifier;
 @synthesize myGerms = _myGerms;
+@synthesize defaults = _defaults;
 
 - (void)setMyGerms:(NSMutableArray *)myGerms {
     _myGerms = myGerms;
@@ -43,9 +45,10 @@
     return _cleanMeNotifier;
 }
 
+// when to remind user to clean screen
 - (NSDate *)nextFireDate {
-    //TODO Placeholder -- determine based on user preferences / whatever
-    return [NSDate dateWithTimeIntervalSinceNow:10];
+    NSNumber *reminderInterval = [self.defaults objectForKey:@"reminderInterval"];
+    return [NSDate dateWithTimeIntervalSinceNow:[reminderInterval integerValue]];
 }
 
 - (IBAction)cleanButtonPressed:(id)sender {
