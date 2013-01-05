@@ -121,7 +121,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WCE-b7-qvw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="529" y="461"/>
+            <point key="canvasLocation" x="537" y="817"/>
         </scene>
         <!--Table View Controller - Settings-->
         <scene sceneID="LPr-K5-ONV">
@@ -216,7 +216,7 @@
                     <navigationItem key="navigationItem" title="Settings" id="J9g-zN-U9o"/>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="522" y="-194"/>
+            <point key="canvasLocation" x="537" y="150"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jUz-tW-2HI">
@@ -235,17 +235,6 @@
             <point key="canvasLocation" x="-1032" y="238"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cleanButtonPressed:"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

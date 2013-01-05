@@ -53,7 +53,8 @@
 
 - (IBAction)cleanButtonPressed:(id)sender {
     [self.cleanMeNotifier setFireDate:self.nextFireDate];
-    [self.cleanMeNotifier setAlertBody:@"Clean me again!"];
+    [self.cleanMeNotifier setRepeatInterval:[[self.defaults objectForKey:@"repeatInterval"] integerValue]];
+    [self.cleanMeNotifier setAlertBody:@"Time to clean your screen"];
     
     // overlaps with cancelAllLocalNotifications in a funky way. Doing both just in case.
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0]; 
@@ -124,7 +125,7 @@
                               delay:0.0
                             options: UIViewAnimationOptionAllowUserInteraction
                          animations:^{
-                             sender.frame = CGRectMake( moveX,
+                             sender.frame = CGRectMake(moveX,
                                                        moveY,
                                                        sender.frame.size.width,
                                                        sender.frame.size.height);
@@ -173,7 +174,7 @@
                               delay:0.0
                             options: UIViewAnimationOptionAllowUserInteraction
                          animations:^{
-                             sender.frame = CGRectMake( moveX,
+                             sender.frame = CGRectMake(moveX,
                                                        moveY,
                                                        sender.frame.size.width,
                                                        sender.frame.size.height);
@@ -196,7 +197,7 @@
     
     for(int i = 0; i < 80; i++) {
         GermView *myGerm = [[GermView alloc]init];
-        int germsize = 80 - arc4random()%10;
+        int germsize = 80 - arc4random() % 10;
         
         germsize = germsize * sizemodifier;
         [myGerm setBounds:CGRectMake(0, 0, germsize, germsize)];
@@ -211,7 +212,7 @@
             [myGerm setBodyAtlasWithPath:@"Atlas1Skull.png"];
             [myGerm setFaceAtlasWithPath:@"Atlas1Skull.png"];
         }
-        else if(randomnumber == 1){
+        else if(randomnumber == 1) {
             [myGerm setBodyAtlasWithPath:@"Atlas1Blob.png"];
             [myGerm setFaceAtlasWithPath:@"Atlas1Blob.png"];
         }
@@ -222,16 +223,14 @@
         
         [myGerm addTarget:self action:@selector(germPressed:) forControlEvents:UIControlEventTouchUpInside];
         [myGerm randomizeTargetVelocity];
-        [myGerm setMaxMagnitudeIncrement:[NSNumber numberWithDouble:0.001f*sizemodifier]];
+        [myGerm setMaxMagnitudeIncrement:[NSNumber numberWithDouble:0.001f * sizemodifier]];
         [myGerm setMaxDirectionIncrement:[NSNumber numberWithDouble:(M_PI / 16 / sizemodifier)]];
         [self.view insertSubview:myGerm atIndex:0];
         [self.myGerms addObject:[self.view.subviews objectAtIndex:0]];
         
-        
         //[self startLinearMovement:myGerm magnitude:[NSNumber numberWithDouble:(arc4random() % 300 / 100 + .5)] directionInRadians:[NSNumber numberWithDouble:(arc4random() % 3600) * M_PI / 1800]];
         
         [NSTimer scheduledTimerWithTimeInterval:1.0f target:myGerm selector:@selector(randomizeTargetVelocity) userInfo:nil repeats:YES];   //Periodically Changes Target Velocity
-        
         
         
         [self startRandomMovement:myGerm];
