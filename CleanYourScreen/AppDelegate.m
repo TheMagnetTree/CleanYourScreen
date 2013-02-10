@@ -16,8 +16,27 @@
     NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
                                     [NSNumber numberWithInt:10000000], @"reminderInterval", // TODO: Find good default values
                                     [NSNumber numberWithInt:60 * 60 * 2], @"repeatInterval",
+                                    [NSNumber numberWithBool:YES], @"firstRun",
+                                    [NSNumber numberWithBool:YES], @"enableNotifications",
                                      nil]; //add any defaults here
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
+    /*
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    // iPhone only for now. Programatically set initial view controller
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"MainStoryboard_iPhone" bundle:nil];
+    UIViewController *initialViewController;
+    if([[defaults objectForKey:@"firstRun"] boolValue] == YES) {
+        initialViewController = [storyBoard instantiateViewControllerWithIdentifier:@"tutorial"];
+    }
+    else {
+        initialViewController = [storyBoard instantiateViewControllerWithIdentifier:@"main"];
+    }
+    UIWindow *window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    window.rootViewController = initialViewController;
+    [window makeKeyAndVisible];
+     */
+    
     return YES;
 }
 							

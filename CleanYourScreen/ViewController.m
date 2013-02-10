@@ -34,6 +34,17 @@
     return _myGerms;
 }
 
+- (void)setDefaults:(NSUserDefaults *)defaults {
+    _defaults = defaults;
+}
+
+- (NSUserDefaults *)defaults {
+    if(!_defaults) {
+        _defaults = [NSUserDefaults standardUserDefaults];
+    }
+    return _defaults;
+}
+
 - (void)setCleanMeNotfier:(UILocalNotification *)cleanMeNotifier {
     _cleanMeNotifier = cleanMeNotifier;
 }
@@ -89,6 +100,7 @@
         [sender blinkEyes:[NSNumber numberWithInt:2] withOpenDuration:[NSNumber numberWithFloat:0.15f]
                                                     withCloseDuration:[NSNumber numberWithFloat:0.05f]
                                                        withStartDelay:[NSNumber numberWithFloat:0.2f]];
+        NSLog(@"I have path:%@", [sender path]);
     }
     
 }
@@ -187,17 +199,25 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    if([[self.defaults objectForKey:@"firstRun"] boolValue] == YES) {
+        [self performSegueWithIdentifier:@"tutorialSegue" sender:self];
+        [self.defaults setObject:[NSNumber numberWithBool:NO] forKey:@"firstRun"];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
-    
+}
+
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
     double sizemodifier = 1;
     
-    for(int i = 0; i < 80; i++) {
+    for(int i = 0; i < 4; i++) {
         GermView *myGerm = [[GermView alloc]init];
-        int germsize = 80 - arc4random() % 10;
+        int germsize = 80;// - arc4random() % 10;
         
         germsize = germsize * sizemodifier;
         [myGerm setBounds:CGRectMake(0, 0, germsize, germsize)];
@@ -206,19 +226,23 @@
         
         
         //Decide Type of Germ
-        int randomnumber = i%3;
+        int randomnumber = i;
         
         if(randomnumber == 0) {
-            [myGerm setBodyAtlasWithPath:@"Atlas1Skull.png"];
-            [myGerm setFaceAtlasWithPath:@"Atlas1Skull.png"];
+            [myGerm setBodyAtlasWithPath:@"Atlas1Blob100.png"];
+            [myGerm setFaceAtlasWithPath:@"Atlas1Blob100.png"];
         }
         else if(randomnumber == 1) {
-            [myGerm setBodyAtlasWithPath:@"Atlas1Blob.png"];
-            [myGerm setFaceAtlasWithPath:@"Atlas1Blob.png"];
+            [myGerm setBodyAtlasWithPath:@"Atlas1Blob128.png"];
+            [myGerm setFaceAtlasWithPath:@"Atlas1Blob128.png"];
+        }
+        else if(randomnumber == 2) {
+            [myGerm setBodyAtlasWithPath:@"Atlas1Blob500.png"];
+            [myGerm setFaceAtlasWithPath:@"Atlas1Blob500.png"];
         }
         else {
-            [myGerm setBodyAtlasWithPath:@"Atlas1EColi.png"];
-            [myGerm setFaceAtlasWithPath:@"Atlas1EColi.png"];
+            [myGerm setBodyAtlasWithPath:@"Atlas1Blob512.png"];
+            [myGerm setFaceAtlasWithPath:@"Atlas1Blob512.png"];
         }
         
         [myGerm addTarget:self action:@selector(germPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -239,11 +263,6 @@
         
         [NSTimer scheduledTimerWithTimeInterval:0.1f target:myGerm selector:@selector(incrementVelocityToTarget) userInfo:nil repeats:YES];     //Periodically Updates Velocity
     }
-}
-
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 

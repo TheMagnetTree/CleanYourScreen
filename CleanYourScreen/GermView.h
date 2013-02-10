@@ -16,6 +16,8 @@
 @property NSNumber *targetDirectionInRadians;
 @property NSNumber *maxMagnitudeIncrement;
 @property NSNumber *maxDirectionIncrement;
+@property NSString *path; // Get debug info, what germ is this?
+
 
 - (void)blinkForSeconds:(NSNumber *)seconds;
 - (void)blinkEyes:(NSNumber *)numTimes withOpenDuration:(NSNumber *)openSeconds

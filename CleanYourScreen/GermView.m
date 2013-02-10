@@ -16,7 +16,6 @@
 @property CALayer *faceLayer;
 @property CALayer *bodyLayer;
 
-
 @end
 
 @implementation GermView
@@ -32,14 +31,15 @@
 @synthesize bodyAtlas = _bodyAtlas;
 @synthesize faceLayer = _faceLayer;
 @synthesize bodyLayer = _bodyLayer;
+@synthesize path = _path;
 
 // I basically do the same thing twice with face/body... DERP lernan
-#define BODY_WIDTH 256
-#define BODY_HEIGHT 256
+#define BODY_WIDTH 100
+#define BODY_HEIGHT 100
 
 - (void)setBodyAtlasWithPath:(NSString *)pathToBodyAtlas {
-    NSString *path = [[NSBundle mainBundle] pathForResource:pathToBodyAtlas ofType:nil];
-    self.bodyAtlas = [UIImage imageWithContentsOfFile:path].CGImage;
+    self.path = [[NSBundle mainBundle] pathForResource:pathToBodyAtlas ofType:nil];
+    self.bodyAtlas = [UIImage imageWithContentsOfFile:self.path].CGImage;
     [self initBodyLayer];
 }
 
@@ -59,8 +59,8 @@
     self.faceLayer.actions = newActions;
 }
 
-#define FACE_WIDTH 256
-#define FACE_HEIGHT 256
+#define FACE_WIDTH 100
+#define FACE_HEIGHT 100
 
 - (void)setFaceAtlasWithPath:(NSString *)pathToFaceAtlas {
     NSString *path = [[NSBundle mainBundle] pathForResource:pathToFaceAtlas ofType:nil];
