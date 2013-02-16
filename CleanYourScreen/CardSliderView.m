@@ -15,7 +15,39 @@
 
 @implementation CardSliderView
 
-@synthesize cardArray = _cardArray;
+#define CARD_TRANSITION_OFFSET 50
+
+- (NSArray *)cardArray
+{
+    if(!_cardArray)
+        _cardArray = [[NSArray alloc]init];
+    return _cardArray;
+}
+
+- (void)setCardArray:(NSArray *)cardArray
+{
+    _cardArray = cardArray;
+    // Hide all cards except the first
+    for(int i = 1; i < [self.cardArray count]; i++)
+    {
+        if([[self.cardArray objectAtIndex:i] isKindOfClass:[UIView class]])
+        {
+            UIView *view = [self.cardArray objectAtIndex:i];
+            [view setHidden:YES];
+            [view.frame = CGRectMake(view.frame.origin.x + CARD_TRANSITION_OFFSET,
+                                      view.frame.origin.y,
+                                      view.frame.size.width,
+                                      view.frame.size.height);
+        }
+    }
+    // Reset current array position
+    self.currentArrayPosition = 0;
+}
+
+- (UIView *)currentCard
+{
+    return [self.cardArray objectAtIndex:self.currentArrayPosition];
+}
 
 - (void)transitionLeft
 {
@@ -31,7 +63,7 @@
             UIView *currentView = [self.cardArray objectAtIndex:self.currentArrayPosition];
             [currentView setHidden:NO];
             [currentView setAlpha: 1.0f];
-            currentView.frame = CGRectMake(currentView.frame.origin.x + 50,
+            currentView.frame = CGRectMake(currentView.frame.origin.x + CARD_TRANSITION_OFFSET,
                                             currentView.frame.origin.y,
                                             currentView.frame.size.width,
                                             currentView.frame.size.height);
@@ -39,7 +71,7 @@
             UIView *oldView = [self.cardArray objectAtIndex:(self.currentArrayPosition + 1)];
             [oldView setHidden:YES];
             [oldView setAlpha:0.0f];
-            currentView.frame = CGRectMake(currentView.frame.origin.x + 50,
+            currentView.frame = CGRectMake(currentView.frame.origin.x + CARD_TRANSITION_OFFSET,
                                            currentView.frame.origin.y,
                                            currentView.frame.size.width,
                                            currentView.frame.size.height);
@@ -62,7 +94,7 @@
             UIView *currentView = [self.cardArray objectAtIndex:self.currentArrayPosition];
             [currentView setHidden:NO];
             [currentView setAlpha: 1.0f];
-            currentView.frame = CGRectMake(currentView.frame.origin.x - 50,
+            currentView.frame = CGRectMake(currentView.frame.origin.x - CARD_TRANSITION_OFFSET,
                                             currentView.frame.origin.y,
                                             currentView.frame.size.width,
                                             currentView.frame.size.height);
@@ -70,7 +102,7 @@
             UIView *oldView = [self.cardArray objectAtIndex:(self.currentArrayPosition - 1)];
             [oldView setHidden:YES];
             [oldView setAlpha:0.0f];
-            currentView.frame = CGRectMake(currentView.frame.origin.x - 50,
+            currentView.frame = CGRectMake(currentView.frame.origin.x - CARD_TRANSITION_OFFSET,
                                            currentView.frame.origin.y,
                                            currentView.frame.size.width,
                                            currentView.frame.size.height);
@@ -82,7 +114,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        // init
     }
     return self;
 }

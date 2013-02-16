@@ -8,12 +8,14 @@
 
 #import "ViewController.h"
 #import "GermView.h"
+#import "CardSliderView.h"
 
 @interface ViewController ()
 
 @property (strong, nonatomic) UILocalNotification *cleanMeNotifier;
 @property (strong, nonatomic) NSMutableArray *myGerms; // keep track of the views that are germs
 @property (strong, nonatomic) NSUserDefaults *defaults;
+@property (strong, nonatomic) CardSliderView *cardSliderView;
 
 @end
 
@@ -89,20 +91,13 @@
     // TODO Clean up any UI goodness and save stats
 }
 
-
 - (void)germPressed:(id)sender {
-    /*
-    if([sender isKindOfClass:[GermView class]]) {
-        [sender blinkForSeconds:[NSNumber numberWithFloat:0.5]];
-    }
-    */
     if([sender isKindOfClass:[GermView class]]) {
         [sender blinkEyes:[NSNumber numberWithInt:2] withOpenDuration:[NSNumber numberWithFloat:0.15f]
                                                     withCloseDuration:[NSNumber numberWithFloat:0.05f]
                                                        withStartDelay:[NSNumber numberWithFloat:0.2f]];
         NSLog(@"I have path:%@", [sender path]);
     }
-    
 }
 
 - (void)startLinearMovement:(UIView *)sender magnitude:(NSNumber *)magnitude directionInRadians:(NSNumber *)direction {
@@ -197,10 +192,24 @@
     }
 }
 
+- (void)initCardSliderView {
+    NSMutableArray *cards = [[NSMutibleArray alloc]init];
+    CGRect cardRect = CGRectMake(100, 100, 458, 654); // TODO: find card start point / size
+
+    // Create cards and add to array
+    UIView *card = [[UIView alloc] initWithFrame:cardRect];
+    UIImage *cardImage = [UIImage imageNamed:@"test card.png"];
+    UIImageView *cardImageView = [[UIImageView alloc] initWithImage:cardImage];
+    [card addSubview:cardImage];
+    [cards addObject:[card copy]];
+
+    [self.cardSliderView setCardArray:[NSArray arrayWithArray:cards]];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     if([[self.defaults objectForKey:@"firstRun"] boolValue] == YES) {
-        [self performSegueWithIdentifier:@"tutorialSegue" sender:self];
+        // TODO: Show tutorial on first run
         [self.defaults setObject:[NSNumber numberWithBool:NO] forKey:@"firstRun"];
     }
 }
@@ -210,11 +219,11 @@
     [super viewDidAppear:YES];
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    double sizemodifier = 1;
+    const double sizemodifier = 1;
     
+    // TODO: Determine how many germs will spawn when loaded
     for(int i = 0; i < 4; i++) {
         GermView *myGerm = [[GermView alloc]init];
         int germsize = 80;// - arc4random() % 10;
@@ -256,7 +265,6 @@
         
         [NSTimer scheduledTimerWithTimeInterval:1.0f target:myGerm selector:@selector(randomizeTargetVelocity) userInfo:nil repeats:YES];   //Periodically Changes Target Velocity
         
-        
         [self startRandomMovement:myGerm];
         
         //Start timers for velocity changes
@@ -270,5 +278,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end

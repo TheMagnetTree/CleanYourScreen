@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CardSliderView : UIView
-
+@interface CardSliderView : UIView 
 - (void)transitionLeft;
 - (void)transitionRight;
+- (void)setCardArray:(NSArray *) cards;
+- (UIView *)currentCard;
 
 @end
