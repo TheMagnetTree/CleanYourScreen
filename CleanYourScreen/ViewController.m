@@ -16,7 +16,6 @@
 @property (strong, nonatomic) NSMutableArray *myGerms; // keep track of the views that are germs
 @property (strong, nonatomic) NSUserDefaults *defaults;
 @property (weak, nonatomic) IBOutlet CardSliderView *cardSliderView;
-
 @end
 
 @implementation ViewController
@@ -58,26 +57,53 @@
     return _cleanMeNotifier;
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(buttonIndex == 1)
+        [self cleanTheScreen];
+}
+
 // when to remind user to clean screen
 - (NSDate *)nextFireDate {
     NSNumber *reminderInterval = [self.defaults objectForKey:@"reminderInterval"];
     return [NSDate dateWithTimeIntervalSinceNow:[reminderInterval integerValue]];
 }
 
-- (IBAction)left:(id)sender {
+- (IBAction)swipeRightOnCardView:(id)sender {
     [self.cardSliderView transitionLeft];
 }
 
-- (IBAction)cleanButtonPressed:(id)sender {
-    // temp
+- (IBAction)swipeLeftOnCardView:(id)sender {
     [self.cardSliderView transitionRight];
-    //
+}
+
+- (IBAction)cleanButtonPressed:(id)sender {
+    
+    UIAlertView *cleanAlert= [[UIAlertView alloc] initWithTitle:@"Clean your screen!"
+                                             message:@"Press Done when finished cleaning"
+                                                       delegate:self
+                                    cancelButtonTitle:@"Cancel"
+                                   otherButtonTitles:@"Done", nil];
+    [cleanAlert show];
+}
+
+- (void)germPressed:(id)sender {
+    if([sender isKindOfClass:[GermView class]]) {
+        [sender blinkEyes:[NSNumber numberWithInt:2] withOpenDuration:[NSNumber numberWithFloat:0.15f]
+                                                    withCloseDuration:[NSNumber numberWithFloat:0.05f]
+                                                       withStartDelay:[NSNumber numberWithFloat:0.2f]];
+        NSLog(@"I have path:%@", [sender path]);
+    }
+}
+
+- (void)cleanTheScreen
+{
     [self.cleanMeNotifier setFireDate:self.nextFireDate];
     [self.cleanMeNotifier setRepeatInterval:[[self.defaults objectForKey:@"repeatInterval"] integerValue]];
     [self.cleanMeNotifier setAlertBody:@"Time to clean your screen"];
     
     // overlaps with cancelAllLocalNotifications in a funky way. Doing both just in case.
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0]; 
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     [[UIApplication sharedApplication] scheduleLocalNotification:self.cleanMeNotifier];
@@ -94,16 +120,6 @@
                                  [self.myGerms removeObject:[germsToFade objectAtIndex:i]];
                              }];
         }
-    }
-    // TODO Clean up any UI goodness and save stats
-}
-
-- (void)germPressed:(id)sender {
-    if([sender isKindOfClass:[GermView class]]) {
-        [sender blinkEyes:[NSNumber numberWithInt:2] withOpenDuration:[NSNumber numberWithFloat:0.15f]
-                                                    withCloseDuration:[NSNumber numberWithFloat:0.05f]
-                                                       withStartDelay:[NSNumber numberWithFloat:0.2f]];
-        NSLog(@"I have path:%@", [sender path]);
     }
 }
 
@@ -229,7 +245,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     if([[self.defaults objectForKey:@"firstRun"] boolValue] == YES) {
-        // TODO: Show tutorial on first run
+        [self.cardSliderView setHidden:NO];
         [self.defaults setObject:[NSNumber numberWithBool:NO] forKey:@"firstRun"];
     }
 }
@@ -256,23 +272,11 @@
         
         
         //Decide Type of Germ
-        int randomnumber = 0i;
+        int randomnumber = 0;
         
         if(randomnumber == 0) {
             [myGerm setBodyAtlasWithPath:@"Atlas1Blob100.png"];
             [myGerm setFaceAtlasWithPath:@"Atlas1Blob100.png"];
-        }
-        else if(randomnumber == 1) {
-            [myGerm setBodyAtlasWithPath:@"Atlas1Blob128.png"];
-            [myGerm setFaceAtlasWithPath:@"Atlas1Blob128.png"];
-        }
-        else if(randomnumber == 2) {
-            [myGerm setBodyAtlasWithPath:@"Atlas1Blob500.png"];
-            [myGerm setFaceAtlasWithPath:@"Atlas1Blob500.png"];
-        }
-        else {
-            [myGerm setBodyAtlasWithPath:@"Atlas1Blob512.png"];
-            [myGerm setFaceAtlasWithPath:@"Atlas1Blob512.png"];
         }
         
         [myGerm addTarget:self action:@selector(germPressed:) forControlEvents:UIControlEventTouchUpInside];
