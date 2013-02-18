@@ -37,14 +37,37 @@
                                     <outlet property="delegate" destination="2" id="hha-Rw-rdl"/>
                                 </connections>
                             </adBannerView>
+                            <view autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yck-Qk-7hO" customClass="CardSliderView">
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pyi-wa-M77">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="left:" destination="2" eventType="touchUpInside" id="DJu-pM-dxh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="50C-w5-AYa" firstAttribute="centerX" secondItem="sGQ-6G-N9P" secondAttribute="centerX" type="default" id="AHv-0S-maY"/>
-                            <constraint firstItem="50C-w5-AYa" firstAttribute="top" secondItem="3" secondAttribute="top" constant="230" id="QOL-Zu-YhJ"/>
+                            <constraint firstItem="Pyi-wa-M77" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="38" id="2TF-P0-doP"/>
+                            <constraint firstAttribute="bottom" secondItem="50C-w5-AYa" secondAttribute="bottom" constant="130" id="EO8-2c-vhl"/>
+                            <constraint firstAttribute="bottom" secondItem="Pyi-wa-M77" secondAttribute="bottom" constant="123" id="GIw-2a-Rj6"/>
+                            <constraint firstAttribute="trailing" secondItem="50C-w5-AYa" secondAttribute="trailing" constant="60" id="Qsh-pK-SDe"/>
+                            <constraint firstItem="Pyi-wa-M77" firstAttribute="baseline" secondItem="50C-w5-AYa" secondAttribute="baseline" type="default" id="Thb-wv-2D4"/>
+                            <constraint firstItem="Yck-Qk-7hO" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="75" id="Y87-1R-KLA"/>
+                            <constraint firstAttribute="bottom" secondItem="Yck-Qk-7hO" secondAttribute="bottom" constant="193" id="fKq-NS-H3w"/>
                             <constraint firstItem="sGQ-6G-N9P" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="h5c-9K-O2O"/>
+                            <constraint firstAttribute="trailing" secondItem="Yck-Qk-7hO" secondAttribute="trailing" constant="96" id="sWS-Rb-Er6"/>
                             <constraint firstItem="sGQ-6G-N9P" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="suZ-sq-Epj"/>
                             <constraint firstItem="sGQ-6G-N9P" firstAttribute="top" secondItem="3" secondAttribute="top" constant="460" id="t65-yc-iaT"/>
+                            <constraint firstItem="Yck-Qk-7hO" firstAttribute="top" secondItem="3" secondAttribute="top" constant="58" id="tgB-fx-sLC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TITLE!" id="gTQ-3D-pei">
@@ -64,10 +87,13 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="PWr-kl-3pa">
                             <connections>
-                                <segue destination="Xz6-MA-jua" kind="push" id="ipr-E2-iu0"/>
+                                <segue destination="Xz6-MA-jua" kind="push" id="ZSU-Q3-0Bd"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="cardSliderView" destination="Yck-Qk-7hO" id="MXI-bX-zJe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
@@ -282,6 +308,28 @@
             <point key="canvasLocation" x="-1098" y="238"/>
         </scene>
     </scenes>
+    <classes>
+        <class className="CardSliderView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CardSliderView.h"/>
+        </class>
+        <class className="IntervalSettingsTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/IntervalSettingsTableViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cleanButtonPressed:"/>
+                <relationship kind="action" name="left:"/>
+                <relationship kind="outlet" name="cardSliderView" candidateClass="CardSliderView"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

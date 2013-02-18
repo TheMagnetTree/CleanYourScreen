@@ -15,7 +15,7 @@
 @property (strong, nonatomic) UILocalNotification *cleanMeNotifier;
 @property (strong, nonatomic) NSMutableArray *myGerms; // keep track of the views that are germs
 @property (strong, nonatomic) NSUserDefaults *defaults;
-@property (strong, nonatomic) CardSliderView *cardSliderView;
+@property (weak, nonatomic) IBOutlet CardSliderView *cardSliderView;
 
 @end
 
@@ -64,7 +64,14 @@
     return [NSDate dateWithTimeIntervalSinceNow:[reminderInterval integerValue]];
 }
 
+- (IBAction)left:(id)sender {
+    [self.cardSliderView transitionLeft];
+}
+
 - (IBAction)cleanButtonPressed:(id)sender {
+    // temp
+    [self.cardSliderView transitionRight];
+    //
     [self.cleanMeNotifier setFireDate:self.nextFireDate];
     [self.cleanMeNotifier setRepeatInterval:[[self.defaults objectForKey:@"repeatInterval"] integerValue]];
     [self.cleanMeNotifier setAlertBody:@"Time to clean your screen"];
@@ -193,16 +200,29 @@
 }
 
 - (void)initCardSliderView {
-    NSMutableArray *cards = [[NSMutibleArray alloc]init];
-    CGRect cardRect = CGRectMake(100, 100, 458, 654); // TODO: find card start point / size
-
+    NSMutableArray *cards = [[NSMutableArray alloc]init];
+    CGRect cardRect = CGRectMake(0
+                                ,0
+                                ,self.cardSliderView.frame.size.width
+                                ,self.cardSliderView.frame.size.height);
+    
     // Create cards and add to array
+    UIView *card1 = [[UIView alloc] initWithFrame:cardRect];
+    UIImage *cardImage1 = [UIImage imageNamed:@"test card.png"];
+    UIImageView *cardImageView1 = [[UIImageView alloc] initWithFrame:cardRect];
+    [cardImageView1 setContentMode:UIViewContentModeScaleAspectFill];
+    [cardImageView1 setImage:cardImage1];
+    [card1 addSubview:cardImageView1];
+    [cards addObject:card1];
+    
     UIView *card = [[UIView alloc] initWithFrame:cardRect];
     UIImage *cardImage = [UIImage imageNamed:@"test card.png"];
-    UIImageView *cardImageView = [[UIImageView alloc] initWithImage:cardImage];
-    [card addSubview:cardImage];
-    [cards addObject:[card copy]];
-
+    UIImageView *cardImageView = [[UIImageView alloc] initWithFrame:cardRect];
+    [cardImageView setContentMode:UIViewContentModeScaleAspectFill];
+    [cardImageView setImage:cardImage];
+    [card addSubview:cardImageView];
+    [cards addObject:card];
+    
     [self.cardSliderView setCardArray:[NSArray arrayWithArray:cards]];
 }
 
@@ -217,6 +237,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:YES];
+    [self initCardSliderView];
 }
 
 - (void)viewDidLoad {
@@ -271,7 +292,7 @@
         
         [NSTimer scheduledTimerWithTimeInterval:0.1f target:myGerm selector:@selector(incrementVelocityToTarget) userInfo:nil repeats:YES];     //Periodically Updates Velocity
     }
-	// Do any additional setup after loading the view, typically from a nib.
+    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {

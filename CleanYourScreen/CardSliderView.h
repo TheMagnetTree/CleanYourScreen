@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <dispatch/dispatch.h>
+
 
 @interface CardSliderView : UIView 
 - (void)transitionLeft;
