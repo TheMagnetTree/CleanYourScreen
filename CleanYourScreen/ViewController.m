@@ -245,7 +245,7 @@
     const double sizemodifier = 1;
     
     // TODO: Determine how many germs will spawn when loaded
-    for(int i = 0; i < 4; i++) {
+    for(int i = 0; i < 100; i++) {
         GermView *myGerm = [[GermView alloc]init];
         int germsize = 80;// - arc4random() % 10;
         
@@ -256,7 +256,7 @@
         
         
         //Decide Type of Germ
-        int randomnumber = i;
+        int randomnumber = 0i;
         
         if(randomnumber == 0) {
             [myGerm setBodyAtlasWithPath:@"Atlas1Blob100.png"];
@@ -282,15 +282,15 @@
         [self.view insertSubview:myGerm atIndex:0];
         [self.myGerms addObject:[self.view.subviews objectAtIndex:0]];
         
-        //[self startLinearMovement:myGerm magnitude:[NSNumber numberWithDouble:(arc4random() % 300 / 100 + .5)] directionInRadians:[NSNumber numberWithDouble:(arc4random() % 3600) * M_PI / 1800]];
+        [self startLinearMovement:myGerm magnitude:[NSNumber numberWithDouble:(arc4random() % 300 / 100 + .5)] directionInRadians:[NSNumber numberWithDouble:(arc4random() % 3600) * M_PI / 1800]];
         
-        [NSTimer scheduledTimerWithTimeInterval:1.0f target:myGerm selector:@selector(randomizeTargetVelocity) userInfo:nil repeats:YES];   //Periodically Changes Target Velocity
+        //[NSTimer scheduledTimerWithTimeInterval:1.0f target:myGerm selector:@selector(randomizeTargetVelocity) userInfo:nil repeats:YES];   //Periodically Changes Target Velocity
         
-        [self startRandomMovement:myGerm];
+        //[self startRandomMovement:myGerm];
         
         //Start timers for velocity changes
         
-        [NSTimer scheduledTimerWithTimeInterval:0.1f target:myGerm selector:@selector(incrementVelocityToTarget) userInfo:nil repeats:YES];     //Periodically Updates Velocity
+        //[NSTimer scheduledTimerWithTimeInterval:0.1f target:myGerm selector:@selector(incrementVelocityToTarget) userInfo:nil repeats:YES];     //Periodically Updates Velocity
     }
     // Do any additional setup after loading the view, typically from a nib.
 }
