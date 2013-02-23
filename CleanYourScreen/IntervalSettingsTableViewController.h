@@ -11,6 +11,6 @@
 @interface IntervalSettingsTableViewController : UITableViewController
 
 // Keys are the cell's text and values are the cell's values
-- (void) setIntervalList:(NSArray *) intervalList;
+- (void) setIntervalList:(NSDictionary *) intervalList;
 
 @end

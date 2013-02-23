@@ -70,12 +70,18 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSDictionary *optionsDictionary;
     if([[segue identifier] isEqualToString:@"reminderSegue"])
     {
-        // TODO build settings dictionaries
-        NSArray *optionsArray = [NSArray arrayWithObjects:@"10 minutes", @"30 minutes", nil];
-        IntervalSettingsTableViewController * dest = (IntervalSettingsTableViewController *)[segue destinationViewController];
-        [dest setIntervalList:[optionsArray copy]];
+        optionsDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                             // Order is reversed in settings menu
+                             // Create Dictionary with bottom option first
+                             [NSNumber numberWithInteger:60 * 60], @"1 Hour"
+                            ,[NSNumber numberWithInteger:60 * 30], @"30 Minutes [optimal]"
+                            ,nil];
+        IntervalSettingsTableViewController * dest =
+        (IntervalSettingsTableViewController *)[segue destinationViewController];
+        [dest setIntervalList:[optionsDictionary copy]];
     }
     
     else if([[segue identifier] isEqualToString:@"intervalSegue"])

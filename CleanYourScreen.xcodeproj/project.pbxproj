@@ -11,6 +11,10 @@
 		63C220FB1687FB8A0036792B /* GermFaceAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C220F71687FB8A0036792B /* GermFaceAtlas.png */; };
 		63C220FC1687FB8A0036792B /* GermFacePlaceholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C220F81687FB8A0036792B /* GermFacePlaceholder.png */; };
 		63C220FD1687FB8A0036792B /* GermPlaceholderProject.xcf in Resources */ = {isa = PBXBuildFile; fileRef = 63C220F91687FB8A0036792B /* GermPlaceholderProject.xcf */; };
+		72730DBC16D95F6700D3169C /* Atlas1Blob100.png in Resources */ = {isa = PBXBuildFile; fileRef = 72730DA816D95F6700D3169C /* Atlas1Blob100.png */; };
+		72730DC816D95F6700D3169C /* CardSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 72730DB616D95F6700D3169C /* CardSliderView.m */; };
+		72730DC916D95F6700D3169C /* IntervalSettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72730DB816D95F6700D3169C /* IntervalSettingsTableViewController.m */; };
+		72730DCA16D95F6700D3169C /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72730DBA16D95F6700D3169C /* SettingsViewController.m */; };
 		7278FA7E1687DF6F003AB2CA /* GermView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7278FA7D1687DF6F003AB2CA /* GermView.m */; };
 		7278FA821687F599003AB2CA /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7278FA811687F599003AB2CA /* Common.m */; };
 		7278FA8E1687FD97003AB2CA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7278FA8D1687FD97003AB2CA /* QuartzCore.framework */; };
@@ -49,6 +53,13 @@
 		63C220F71687FB8A0036792B /* GermFaceAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GermFaceAtlas.png; sourceTree = "<group>"; };
 		63C220F81687FB8A0036792B /* GermFacePlaceholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GermFacePlaceholder.png; sourceTree = "<group>"; };
 		63C220F91687FB8A0036792B /* GermPlaceholderProject.xcf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GermPlaceholderProject.xcf; sourceTree = "<group>"; };
+		72730DA816D95F6700D3169C /* Atlas1Blob100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Atlas1Blob100.png; sourceTree = "<group>"; };
+		72730DB516D95F6700D3169C /* CardSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardSliderView.h; sourceTree = "<group>"; };
+		72730DB616D95F6700D3169C /* CardSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardSliderView.m; sourceTree = "<group>"; };
+		72730DB716D95F6700D3169C /* IntervalSettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntervalSettingsTableViewController.h; sourceTree = "<group>"; };
+		72730DB816D95F6700D3169C /* IntervalSettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntervalSettingsTableViewController.m; sourceTree = "<group>"; };
+		72730DB916D95F6700D3169C /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		72730DBA16D95F6700D3169C /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		7278FA7C1687DF6F003AB2CA /* GermView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GermView.h; sourceTree = "<group>"; };
 		7278FA7D1687DF6F003AB2CA /* GermView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GermView.m; sourceTree = "<group>"; };
 		7278FA801687F599003AB2CA /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
@@ -109,6 +120,7 @@
 		63C220F51687FB8A0036792B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				72730DA816D95F6700D3169C /* Atlas1Blob100.png */,
 				63C220F61687FB8A0036792B /* GermBodyPlaceholder.png */,
 				63C220F71687FB8A0036792B /* GermFaceAtlas.png */,
 				63C220F81687FB8A0036792B /* GermFacePlaceholder.png */,
@@ -160,6 +172,12 @@
 				72E8EFDB1680C21E006FF902 /* ViewController.m */,
 				7278FA7C1687DF6F003AB2CA /* GermView.h */,
 				7278FA7D1687DF6F003AB2CA /* GermView.m */,
+				72730DB516D95F6700D3169C /* CardSliderView.h */,
+				72730DB616D95F6700D3169C /* CardSliderView.m */,
+				72730DB716D95F6700D3169C /* IntervalSettingsTableViewController.h */,
+				72730DB816D95F6700D3169C /* IntervalSettingsTableViewController.m */,
+				72730DB916D95F6700D3169C /* SettingsViewController.h */,
+				72730DBA16D95F6700D3169C /* SettingsViewController.m */,
 				7278FA801687F599003AB2CA /* Common.h */,
 				7278FA811687F599003AB2CA /* Common.m */,
 				63C220F51687FB8A0036792B /* Assets */,
@@ -283,6 +301,7 @@
 				63C220FB1687FB8A0036792B /* GermFaceAtlas.png in Resources */,
 				63C220FC1687FB8A0036792B /* GermFacePlaceholder.png in Resources */,
 				63C220FD1687FB8A0036792B /* GermPlaceholderProject.xcf in Resources */,
+				72730DBC16D95F6700D3169C /* Atlas1Blob100.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +341,9 @@
 				72E8EFDC1680C21E006FF902 /* ViewController.m in Sources */,
 				7278FA7E1687DF6F003AB2CA /* GermView.m in Sources */,
 				7278FA821687F599003AB2CA /* Common.m in Sources */,
+				72730DC816D95F6700D3169C /* CardSliderView.m in Sources */,
+				72730DC916D95F6700D3169C /* IntervalSettingsTableViewController.m in Sources */,
+				72730DCA16D95F6700D3169C /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

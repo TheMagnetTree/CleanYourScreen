@@ -10,7 +10,7 @@
 
 @interface IntervalSettingsTableViewController ()
 
-@property (strong, nonatomic) NSArray *intervalList;
+@property (strong, nonatomic) NSDictionary *intervalList;
 @property (strong, nonatomic) NSUserDefaults *defaults;
 @property (strong, nonatomic) NSIndexPath *lastIndexPath;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -24,13 +24,13 @@
 @synthesize defaults = _defaults;
 @synthesize lastIndexPath = _lastIndexPath;
 
-- (NSArray *)intervalList {
+- (NSDictionary *)intervalList {
     if(!_intervalList)
-        _intervalList = [[NSArray alloc] init];
+        _intervalList = [[NSDictionary alloc] init];
     return _intervalList;
 }
 
-- (void)setIntervalList:(NSArray *)intervalList {
+- (void)setIntervalList:(NSDictionary *)intervalList {
     _intervalList = intervalList;
 }
 
@@ -64,8 +64,8 @@
     [super viewDidLoad];
     [self setLastIndexPath:[NSIndexPath 
            indexPathForRow:[[self.defaults objectForKey:@"intervalTableRow"] integerValue] 
-                 inSection:[[self.defaults objectForKey:@"intervalTableSection"] integerValue]];
-    [tableView reloadData];
+                 inSection:[[self.defaults objectForKey:@"intervalTableSection"] integerValue]]];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,7 +110,7 @@
     {
         [cell setAccessoryType:UITableViewCellAccessoryNone];
     }
-    NSString *cellLabel = [self.intervalList objectAtIndex:[indexPath row]];
+    NSString *cellLabel = [[self.intervalList allKeys] objectAtIndex:indexPath.row];
     cell.textLabel.text = cellLabel;
     return cell;
 }
@@ -164,8 +164,8 @@
     [self.defaults setObject:[self.intervalList objectAtIndex:[indexPath row]] forKey:@"notificationInterval"];
      */
     self.lastIndexPath = indexPath;
-    [self.defaults setObject: [NSNumber numberWithInt:[indexPath.row]] ForKey:@"intervalTableRow"
-    [self.defaults setObject: [NSNumber numberWithInt:[indexPath.section]] ForKey:@"intervalTableSection"
+    [self.defaults setObject:[NSNumber numberWithInteger:indexPath.row] forKey:@"intervalTableRow"];
+    [self.defaults setObject:[NSNumber numberWithInteger:indexPath.section] forKey:@"intervalTableSection"];
     [tableView reloadData];
 }
 
