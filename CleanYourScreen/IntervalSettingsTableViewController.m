@@ -62,12 +62,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self setLastIndexPath:[NSIndexPath 
+           indexPathForRow:[[self.defaults objectForKey:@"intervalTableRow"] integerValue] 
+                 inSection:[[self.defaults objectForKey:@"intervalTableSection"] integerValue]];
+    [tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -166,6 +164,8 @@
     [self.defaults setObject:[self.intervalList objectAtIndex:[indexPath row]] forKey:@"notificationInterval"];
      */
     self.lastIndexPath = indexPath;
+    [self.defaults setObject: [NSNumber numberWithInt:[indexPath.row]] ForKey:@"intervalTableRow"
+    [self.defaults setObject: [NSNumber numberWithInt:[indexPath.section]] ForKey:@"intervalTableSection"
     [tableView reloadData];
 }
 

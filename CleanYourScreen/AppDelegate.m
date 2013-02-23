@@ -14,10 +14,12 @@
 {
     // Override point for customization after application launch.
     NSDictionary *appDefaults = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    [NSNumber numberWithInt:10000000], @"reminderInterval", // TODO: Find good default values
-                                    [NSNumber numberWithInt:60 * 60 * 2], @"repeatInterval",
-                                    [NSNumber numberWithBool:YES], @"firstRun",
-                                    [NSNumber numberWithBool:YES], @"enableNotifications",
+                                    [NSNumber numberWithInt:10000000],      @"reminderInterval", // TODO: Find good default values
+                                    [NSNumber numberWithInt:60 * 60 * 2],   @"repeatInterval",
+                                    [NSNumber numberWithBool:YES],          @"firstRun",
+                                    [NSNumber numberWithBool:YES],          @"enableNotifications",
+                                    [NSNumber numberWithInt:0],             @"intervalTableRow",
+                                    [NSNumber numberWithInt:0],             @"intervalTableSection",
                                      nil]; //add any defaults here
     [[NSUserDefaults standardUserDefaults] registerDefaults:appDefaults];
     /*
