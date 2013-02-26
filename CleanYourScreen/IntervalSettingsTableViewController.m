@@ -159,13 +159,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     /*
-    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     [self.defaults setObject:[self.intervalList objectAtIndex:[indexPath row]] forKey:@"notificationInterval"];
      */
     self.lastIndexPath = indexPath;
-    [self.defaults setObject:[NSNumber numberWithInteger:indexPath.row] forKey:@"intervalTableRow"];
-    [self.defaults setObject:[NSNumber numberWithInteger:indexPath.section] forKey:@"intervalTableSection"];
+    [self.defaults setObject:[NSNumber numberWithInteger:indexPath.row]
+                      forKey:@"intervalTableRow"];
+    [self.defaults setObject:[NSNumber numberWithInteger:indexPath.section]
+                      forKey:@"intervalTableSection"];
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [self.defaults setObject:[NSNumber numberWithInteger:[[self.intervalList objectForKey:cell.textLabel.text] integerValue]]
+                      forKey:@"reminderInterval"];
+    NSLog(@"Reminder interval set to :%d seconds\n", [[self.defaults objectForKey:@"reminderInterval"] integerValue]);
     [tableView reloadData];
 }
 

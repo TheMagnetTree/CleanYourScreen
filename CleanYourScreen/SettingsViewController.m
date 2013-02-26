@@ -33,7 +33,8 @@
 
 - (IBAction)notificationSwitchChanged:(id)sender {
     NSLog(@"Notification toggled to %d", [self.notificationEnableSwitch isOn]);
-    [self.defaults setObject:[NSNumber numberWithBool:[self.notificationEnableSwitch isOn]]forKey:@"enableNotifications"];
+    [self.defaults setObject:[NSNumber numberWithBool:[self.notificationEnableSwitch isOn]]
+                      forKey:@"enableNotifications"];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
