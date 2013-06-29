@@ -123,96 +123,57 @@
     }
 }
 
-- (void)startLinearMovement:(UIView *)sender magnitude:(NSNumber *)magnitude directionInRadians:(NSNumber *)direction {
-    if(magnitude && direction) {
-        // What's our next move?
-        double moveX = sender.frame.origin.x + ([magnitude doubleValue] * cos([direction doubleValue]));
-        double moveY = sender.frame.origin.y + ([magnitude integerValue] * sin([direction doubleValue]));
-        
-        // If out of bounds and moving farther out of bounds then mirror them by adding PI radians
-        if(moveX < 0 && ([direction doubleValue] > M_PI/2 || [direction doubleValue] < M_PI/2*3)) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]]; // add some variance
-            if([direction doubleValue] >= 360)
-                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
-        }
-        else if(moveX > self.view.frame.size.width - sender.frame.size.width && ([direction doubleValue] > M_PI/2*3 || [direction doubleValue] < M_PI/2)) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
-            if([direction doubleValue] >= 360)
-                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
-        }
-        else if(moveY < 0 && ([direction doubleValue] > M_PI || [direction doubleValue] < 0)) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
-            if([direction doubleValue] >= 360)
-                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
-        }
-        else if(moveY > self.view.frame.size.height - sender.frame.size.height && ([direction doubleValue] > 0 || [direction doubleValue] < M_PI)) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
-            if([direction doubleValue] >= 360)
-                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
-        }
-        
-        [UIView animateWithDuration:0.1
-                              delay:0.0
-                            options: UIViewAnimationOptionAllowUserInteraction
-                         animations:^{
-                             sender.frame = CGRectMake(moveX,
-                                                       moveY,
-                                                       sender.frame.size.width,
-                                                       sender.frame.size.height);
-                         }
-                         completion:^(BOOL finished){
-                             [self startLinearMovement:sender magnitude:magnitude directionInRadians:direction];
-                         }];
+- (void)startMovement:(UIView*)sender vecX:(float)x vecY:(float)y {
+    float nextX = sender.frame.origin.x + x;
+    float nextY = sender.frame.origin.y + y;
+    
+    bool reflect = NO;
+    float normal[2] = {0, 0};
+    
+    if(nextX < 0 - sender.frame.size.width) {
+        reflect = YES;
+        normal[0] = 1;
     }
-}
-
-- (void)startRandomMovement:(GermView *)sender{
-    //NSLog(@"Starting Random Movement...\n");
-    if(YES) {
-        // What's our next move?
-        double moveX = sender.frame.origin.x + ([sender.velocityMagnitude doubleValue] * cos([sender.velocityDirectionInRadians doubleValue]));
-        double moveY = sender.frame.origin.y + ([sender.velocityMagnitude doubleValue] * sin([sender.velocityDirectionInRadians doubleValue]));
-        
-        NSNumber* direction = sender.velocityDirectionInRadians;
-        
-        // If out of bounds and moving farther out of bounds then mirror them by adding PI radians
-        if(moveX < 0 && ([direction doubleValue] > M_PI/2 || [direction doubleValue] < M_PI/2*3)) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]]; // add some variance
-            if([direction doubleValue] >= 360)
-                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
-        }
-        else if(moveX > self.view.frame.size.width - sender.frame.size.width && ([direction doubleValue] > M_PI/2*3 || [direction doubleValue] < M_PI/2)) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
-            if([direction doubleValue] >= 360)
-                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
-        }
-        else if(moveY < 50 && ([direction doubleValue] > M_PI || [direction doubleValue] < 0)) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
-            if([direction doubleValue] >= 360)
-                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
-        }
-        else if(moveY > self.view.frame.size.height - sender.frame.size.height && ([direction doubleValue] > 0 || [direction doubleValue] < M_PI)) {
-            direction = [NSNumber numberWithDouble:M_PI + [direction doubleValue]];
-            if([direction doubleValue] >= 360)
-                direction = [NSNumber numberWithDouble:[direction doubleValue] - 360 ];
-        }
-        
-        [sender setVelocityDirectionInRadians:direction];
-        
-        
-        [UIView animateWithDuration:1/30
-                              delay:0.0
-                            options: UIViewAnimationOptionAllowUserInteraction
-                         animations:^{
-                             sender.frame = CGRectMake(moveX,
-                                                       moveY,
-                                                       sender.frame.size.width,
-                                                       sender.frame.size.height);
-                         }
-                         completion:^(BOOL finished){
-                             [self startRandomMovement:sender];
-                         }];
+    else if(nextX > self.view.frame.size.width) {
+        reflect = YES;
+        normal[0] = -1;
     }
+    if(nextY < 0 - sender.frame.size.height) {
+        reflect = YES;
+        normal[1] = 1;
+    }
+    else if(nextY > self.view.frame.size.height) {
+        reflect = YES;
+        normal[1] = -1;
+    }
+    
+    if(reflect == YES) {
+        // r = d - 2(d dot n)n
+        float normalMagnitude = sqrtf((float)abs(normal[0]) + (float)abs(normal[1]));
+        float dot_product = normal[0] * x + normal[1] * y;
+        dot_product *= 2;
+        dot_product /= (normalMagnitude * normalMagnitude);
+        normal[0] *= dot_product;
+        normal[1] *= dot_product;
+        x -= normal[0];
+        y -= normal[1];
+        // vector is now reflected
+        nextX = sender.frame.origin.x + x;
+        nextY = sender.frame.origin.y + y;
+    }
+    
+    [UIView animateWithDuration:0.1
+            delay:0.0
+            options: UIViewAnimationOptionAllowUserInteraction
+            animations:^{
+                sender.frame = CGRectMake(nextX,
+                                          nextY,
+                                          sender.frame.size.width,
+                                          sender.frame.size.height);
+                 }
+                 completion:^(BOOL finished){
+                     [self startMovement:sender vecX:x vecY:y];
+                 }];
 }
 
 - (void)initCardSliderView {
@@ -267,10 +228,9 @@
         
         germsize = germsize * sizemodifier;
         [myGerm setBounds:CGRectMake(0, 0, germsize, germsize)];
-        //[myGerm setCenter:CGPointMake(arc4random() % (int)self.view.frame.size.width + germsize/2 - 5, arc4random() % (int)(self.view.frame.size.height - 50) - germsize/2 + 5 + 50)]; // prevent spawning in walls
-        [myGerm setCenter:CGPointMake(arc4random() % (int)(self.view.frame.size.width - germsize) + germsize/2, arc4random() % (int)(self.view.frame.size.height - 50 - germsize) + germsize/2 + 50)]; // prevent spawning in walls
         
-        
+        [myGerm setCenter:CGPointMake(arc4random() % ((int)self.view.frame.size.width - germsize) + germsize/2,
+                                      arc4random() % ((int)self.view.frame.size.height - germsize * 2) + germsize)];
         //Decide Type of Germ
         int randomnumber = 0;
         
@@ -286,15 +246,8 @@
         [self.view insertSubview:myGerm atIndex:0];
         [self.myGerms addObject:[self.view.subviews objectAtIndex:0]];
         
-        [self startLinearMovement:myGerm magnitude:[NSNumber numberWithDouble:(arc4random() % 300 / 100 + .5)] directionInRadians:[NSNumber numberWithDouble:(arc4random() % 3600) * M_PI / 1800]];
+        [self startMovement:myGerm vecX: arc4random() % 5 + 1 vecY: arc4random() % 5 + 1];
         
-        //[NSTimer scheduledTimerWithTimeInterval:1.0f target:myGerm selector:@selector(randomizeTargetVelocity) userInfo:nil repeats:YES];   //Periodically Changes Target Velocity
-        
-        //[self startRandomMovement:myGerm];
-        
-        //Start timers for velocity changes
-        
-        //[NSTimer scheduledTimerWithTimeInterval:0.1f target:myGerm selector:@selector(incrementVelocityToTarget) userInfo:nil repeats:YES];     //Periodically Updates Velocity
     }
     // Do any additional setup after loading the view, typically from a nib.
 }

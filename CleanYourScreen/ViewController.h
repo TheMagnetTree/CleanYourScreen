@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
+#import <Accelerate/Accelerate.h>
+#import <stdlib.h>
 
 @interface ViewController : UIViewController
 

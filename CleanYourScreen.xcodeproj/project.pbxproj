@@ -18,6 +18,7 @@
 		7278FA7E1687DF6F003AB2CA /* GermView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7278FA7D1687DF6F003AB2CA /* GermView.m */; };
 		7278FA821687F599003AB2CA /* Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 7278FA811687F599003AB2CA /* Common.m */; };
 		7278FA8E1687FD97003AB2CA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7278FA8D1687FD97003AB2CA /* QuartzCore.framework */; };
+		72BAD23A177F945E0028C13F /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72BAD239177F945E0028C13F /* Accelerate.framework */; };
 		72E8EFBD1680C21E006FF902 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E8EFBC1680C21E006FF902 /* UIKit.framework */; };
 		72E8EFBF1680C21E006FF902 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E8EFBE1680C21E006FF902 /* Foundation.framework */; };
 		72E8EFC11680C21E006FF902 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72E8EFC01680C21E006FF902 /* CoreGraphics.framework */; };
@@ -65,6 +66,7 @@
 		7278FA801687F599003AB2CA /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		7278FA811687F599003AB2CA /* Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Common.m; sourceTree = "<group>"; };
 		7278FA8D1687FD97003AB2CA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		72BAD239177F945E0028C13F /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		72E8EFB81680C21E006FF902 /* CleanYourScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CleanYourScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		72E8EFBC1680C21E006FF902 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		72E8EFBE1680C21E006FF902 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -96,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				72BAD23A177F945E0028C13F /* Accelerate.framework in Frameworks */,
 				7278FA8E1687FD97003AB2CA /* QuartzCore.framework in Frameworks */,
 				72E8EFFB1680D8B1006FF902 /* iAd.framework in Frameworks */,
 				72E8EFBD1680C21E006FF902 /* UIKit.framework in Frameworks */,
@@ -132,6 +135,7 @@
 		72E8EFAD1680C21E006FF902 = {
 			isa = PBXGroup;
 			children = (
+				72BAD239177F945E0028C13F /* Accelerate.framework */,
 				7278FA8D1687FD97003AB2CA /* QuartzCore.framework */,
 				72E8EFFA1680D8B1006FF902 /* iAd.framework */,
 				72E8EFC21680C21E006FF902 /* CleanYourScreen */,
