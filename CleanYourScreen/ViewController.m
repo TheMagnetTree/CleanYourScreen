@@ -224,7 +224,7 @@
     // TODO: Determine how many germs will spawn when loaded
     for(int i = 0; i < 100; i++) {
         GermView *myGerm = [[GermView alloc]init];
-        int germsize = 80;// - arc4random() % 10;
+        int germsize = 80 - arc4random() % 10;
         
         germsize = germsize * sizemodifier;
         [myGerm setBounds:CGRectMake(0, 0, germsize, germsize)];
