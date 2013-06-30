@@ -245,8 +245,17 @@
         [myGerm setMaxDirectionIncrement:[NSNumber numberWithDouble:(M_PI / 16 / sizemodifier)]];
         [self.view insertSubview:myGerm atIndex:0];
         [self.myGerms addObject:[self.view.subviews objectAtIndex:0]];
-        
-        [self startMovement:myGerm vecX: arc4random() % 5 + 1 vecY: arc4random() % 5 + 1];
+        float xVector = ((arc4random() % 500) + 1) / 100;
+        float yVector = ((arc4random() % 500) + 1) / 100;
+        if(arc4random() % 2 == 1)
+        {
+            xVector *= -1;
+        }
+        if(arc4random() % 2 == 1)
+        {
+            yVector *= -1;
+        }
+        [self startMovement:myGerm vecX: xVector vecY: yVector];
         
     }
     // Do any additional setup after loading the view, typically from a nib.
